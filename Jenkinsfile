@@ -2,7 +2,7 @@ pipeline
 {
 
 agent {
-  label 'DevServer'
+  label 'DevNode'
 }
 
 parameters {
@@ -10,10 +10,10 @@ parameters {
 }
 
 environment{
-    NAME = "piyush"
+    NAME = "Shankar"
 }
 tools {
-  maven 'mymaven'
+  maven 'myMaven'
 }
 
 stages{
@@ -38,7 +38,7 @@ stages{
         parallel {
             stage('testA')
             {
-                agent { label 'DevServer' }
+                agent { label 'DevNode' }
                 steps{
                     echo " This is test A"
                     sh "mvn test"
@@ -47,7 +47,7 @@ stages{
             }
             stage('testB')
             {
-                agent { label 'DevServer' }
+                agent { label 'DevNode' }
                 steps{
                 echo "this is test B"
                 sh "mvn test"
@@ -69,7 +69,7 @@ stages{
     {
       when { branch 'develop' 
         beforeAgent true}
-        agent { label 'DevServer' }
+        agent { label 'DevNode' }
         steps
         {
             dir("/var/www/html")
@@ -87,7 +87,7 @@ stages{
     {
       when { branch 'master'
         beforeAgent true}
-        agent { label 'ProdServer' }
+        agent { label 'ProdNode' }
         steps
         {
              timeout(time:5, unit:'DAYS'){
